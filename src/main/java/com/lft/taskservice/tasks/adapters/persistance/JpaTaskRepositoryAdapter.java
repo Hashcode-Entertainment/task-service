@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Repository
@@ -33,4 +35,8 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
         return assignmentMapper.toDomain(savedAssignmentEntity);
     }
 
+    @Override
+    public List<Long> getAllIdsOfTasksAssignedToUser(Long userId) {
+        return assignmentRepository.findAllTasksIdByUserId(userId);
+    }
 }
