@@ -27,7 +27,7 @@ public class TaskController {
         return new ResponseEntity<>(taskDto, HttpStatus.CREATED);
     }
 
-    @PostMapping
+    @PostMapping("/assign")
     public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody AssignmentDto assignmentDto) {
         var assignment = assignmentMapper.toDomain(assignmentDto);
         var savedAssignment = taskService.assignTaskToUser(assignment);
