@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskController {
 
     private final RestTaskMapper taskMapper;
+    private final RestAssignmentMapper assignmentMapper;
     private final TaskService taskService;
 
     @PostMapping
@@ -24,6 +25,14 @@ public class TaskController {
         var taskDto = taskMapper.toDto(savedTask);
 
         return new ResponseEntity<>(taskDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping
+    public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody AssignmentDto assignmentDto) {
+        var assignment = assignmentMapper.toDomain(assignmentDto);
+        var savedAssignment = taskService.assignTaskToUser(assignment);
+        var newAssignment = assignmentMapper.toDto(savedAssignment);
+        return new ResponseEntity<>(assignmentDto, HttpStatus.CREATED);
     }
 
 }
