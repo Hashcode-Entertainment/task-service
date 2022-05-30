@@ -10,6 +10,7 @@ public class RestAssignmentMapper {
     private final ModelMapper mapper = new ModelMapper();
 
     Assignment toDomain(NewAssignmentDto newAssignmentDto) {
+        mapper.getConfiguration().setAmbiguityIgnored(true);
         return mapper.map(newAssignmentDto, Assignment.class);
     }
 
