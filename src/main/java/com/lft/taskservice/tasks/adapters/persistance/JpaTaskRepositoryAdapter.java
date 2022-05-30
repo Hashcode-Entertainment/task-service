@@ -22,4 +22,5 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
         var savedTaskEntity = taskRepository.save(taskEntity);
         return taskMapper.toDomain(savedTaskEntity);
     }
+
 }
