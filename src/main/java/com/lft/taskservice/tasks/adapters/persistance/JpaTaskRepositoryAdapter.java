@@ -16,6 +16,10 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
     private final JpaTaskRepository taskRepository;
     private final JpaTaskMapper taskMapper;
 
+    private final JpaAssignmentRepository assignmentRepository;
+
+
+
     @TaskLogging
     public Task save(Task task) {
         var taskEntity = taskMapper.toEntity(task);
