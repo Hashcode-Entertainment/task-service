@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Transactional
 @Repository
@@ -26,6 +28,12 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
         var taskEntity = taskMapper.toEntity(task);
         var savedTaskEntity = taskRepository.save(taskEntity);
         return taskMapper.toDomain(savedTaskEntity);
+    }
+
+    @TaskLogging
+    public Task findById(Long id) {
+      var taskEntity = Optional.of(taskRepository.findById(id).get()).orElseThrow(NoSuchElementException::new);
+      return taskMapper.toDomain(taskEntity);
     }
 
     @TaskLogging

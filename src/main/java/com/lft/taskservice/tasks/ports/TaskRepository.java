@@ -12,4 +12,7 @@ public interface TaskRepository {
     Assignment assignTaskToUser(Assignment assignment);
 
     List<Long> getAllIdsOfTasksAssignedToUser(Long userId);
+
+    Task findById(Long id);
+
 }
