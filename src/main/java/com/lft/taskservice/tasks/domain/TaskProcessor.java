@@ -21,4 +21,11 @@ public class TaskProcessor implements TaskService {
         task.setWorkspaceUrl(url);
         return taskRepository.save(task);
     }
+
+    @TaskLogging
+    @Override
+    public Assignment assignTaskToUser(Assignment assignment){
+        return taskRepository.assignTaskToUser(assignment);
+    }
+
 }

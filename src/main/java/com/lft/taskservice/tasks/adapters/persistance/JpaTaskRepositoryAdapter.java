@@ -16,9 +16,7 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
 
     private final JpaTaskRepository taskRepository;
     private final JpaTaskMapper taskMapper;
-
     private final JpaAssignmentRepository assignmentRepository;
-
     private final JpaAssignmentMapper assignmentMapper;
 
     @TaskLogging
