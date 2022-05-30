@@ -18,7 +18,7 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
 
     private final JpaAssignmentRepository assignmentRepository;
 
-
+    private final JpaAssignmentMapper assignmentMapper;
 
     @TaskLogging
     public Task save(Task task) {
