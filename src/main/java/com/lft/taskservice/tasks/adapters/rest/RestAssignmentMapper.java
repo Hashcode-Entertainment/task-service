@@ -9,8 +9,8 @@ public class RestAssignmentMapper {
 
     private final ModelMapper mapper = new ModelMapper();
 
-    Assignment toDomain(AssignmentDto assignmentDto) {
-        return mapper.map(assignmentDto, Assignment.class);
+    Assignment toDomain(NewAssignmentDto newAssignmentDto) {
+        return mapper.map(newAssignmentDto, Assignment.class);
     }
 
     AssignmentDto toDto(Assignment assignment) {

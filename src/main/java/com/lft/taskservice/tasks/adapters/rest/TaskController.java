@@ -28,11 +28,11 @@ public class TaskController {
     }
 
     @PostMapping("/assign")
-    public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody AssignmentDto assignmentDto) {
-        var assignment = assignmentMapper.toDomain(assignmentDto);
+    public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody NewAssignmentDto newAssignmentDto) {
+        var assignment = assignmentMapper.toDomain(newAssignmentDto);
         var savedAssignment = taskService.assignTaskToUser(assignment);
         var newAssignment = assignmentMapper.toDto(savedAssignment);
-        return new ResponseEntity<>(assignmentDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);
     }
 
 }
