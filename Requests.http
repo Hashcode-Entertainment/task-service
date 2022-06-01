@@ -1,0 +1,30 @@
+###GET all tasks assigned to a particular user by providing userId as path param
+GET http://localhost:8080/tasks/assign/666
+Content-Type: application/json
+Accept: application/json
+
+###POST a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name":"Sample task 1",
+    "description":"sample description",
+    "programmingLang":"Java",
+    "programmingLangVersion":17
+}
+
+### assign a task to a user
+POST http://localhost:8080/tasks/assign
+Content-Type: application/json
+Accept: application/json
+
+{"taskId": 1, "userId":666, "deadline": "2022-06-19"}
+
+### change deadline in an assignment
+PUT http://localhost:8080/tasks/assign
+Content-Type: application/json
+Accept: application/json
+
+{"taskId": 1, "userId":666, "deadline": "2025-12-31"}
