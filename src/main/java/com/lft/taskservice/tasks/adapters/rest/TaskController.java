@@ -57,4 +57,10 @@ public class TaskController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/assignments/{userId}/{taskId}")
+    public ResponseEntity<AssignmentDto> getInfoOnAssignment(@PathVariable("userId") Long userId, @PathVariable("taskId") Long taskId) {
+        var assignment = assignmentMapper.toDto(taskService.getInfoOnAssignment(userId, taskId));
+        return new ResponseEntity(assignment, HttpStatus.FOUND);
+    }
+
 }
