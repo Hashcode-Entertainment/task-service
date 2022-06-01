@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -46,8 +45,8 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
 
     @TaskLogging
     @Override
-    public List<Long> getAllIdsOfTasksAssignedToUser(Long userId) {
-        return assignmentRepository.findAllTasksIdByUserId(userId);
+    public List<Task> getAllTasksAssignedToUser(Long userId) {
+        return taskMapper.mapList(assignmentRepository.findAllTasksAssignedToUser(userId), Task.class);
     }
 
     @Override
@@ -59,4 +58,5 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
     public void deleteAssignment(Long userId, Long taskId) {
         assignmentRepository.deleteAssignment(userId, taskId);
     }
+
 }

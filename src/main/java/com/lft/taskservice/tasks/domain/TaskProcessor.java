@@ -25,6 +25,11 @@ public class TaskProcessor implements TaskService {
         return taskRepository.save(task);
     }
 
+    @Override
+    public Task findTaskById(Long taskId) {
+        return taskRepository.findById(taskId);
+    }
+
     @TaskLogging
     @Override
     public Assignment assignTaskToUser(Assignment assignment){
@@ -33,17 +38,13 @@ public class TaskProcessor implements TaskService {
 
     @Override
     public List<Task> getAllTasksAssignedToUser(Long userId) {
-        var ids = taskRepository.getAllIdsOfTasksAssignedToUser(userId);
-        List<Task> tasks = new ArrayList<>();
-        for (Long id: ids) {
-            tasks.add(taskRepository.findById(id));
-        }
+        var tasks = taskRepository.getAllTasksAssignedToUser(userId);
         return tasks;
     }
 
     @Override
     public void changeDeadline(Assignment assignment) {
-        taskRepository.changeDeadline(assignment.getUserId(), assignment.getTaskId(), assignment.getDeadline());
+        taskRepository.changeDeadline(assignment.getUserId(), assignment.getTask().getId(), assignment.getDeadline());
     }
 
     @Override
