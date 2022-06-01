@@ -28,3 +28,10 @@ Content-Type: application/json
 Accept: application/json
 
 {"taskId": 1, "userId":666, "deadline": "2025-12-31"}
+
+### delete assignment
+DELETE http://localhost:8080/tasks/assign/666/1
+Content-Type: application/json
+Accept: application/json
+
+###
