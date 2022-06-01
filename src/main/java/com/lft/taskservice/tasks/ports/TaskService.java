@@ -15,4 +15,6 @@ public interface TaskService {
 
     void changeDeadline(Assignment assignment);
 
+    void deleteAssignment(Long taskId, Long userId);
+
 }

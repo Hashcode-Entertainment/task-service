@@ -46,4 +46,8 @@ public class TaskProcessor implements TaskService {
         taskRepository.changeDeadline(assignment.getUserId(), assignment.getTaskId(), assignment.getDeadline());
     }
 
+    @Override
+    public void deleteAssignment(Long taskId, Long userId) {
+        taskRepository.deleteAssignment(userId, taskId);
+    }
 }
