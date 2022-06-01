@@ -45,11 +45,10 @@ public class TaskController {
     }
 
     @PutMapping("/assign")
-    public ResponseEntity<AssignmentDto> changeDeadlineOfExistingAssignment(@RequestBody NewAssignmentDto newAssignmentDto) {
+    public ResponseEntity changeDeadlineOfExistingAssignment(@RequestBody NewAssignmentDto newAssignmentDto) {
         var assignmentWithUpdatedDeadline = assignmentMapper.toDomain(newAssignmentDto);
-        var updatedAssignment = taskService.changeDeadline(assignmentWithUpdatedDeadline);
-        var updatedAssignmentDto = assignmentMapper.toDto(updatedAssignment);
-        return new ResponseEntity<>(updatedAssignmentDto, HttpStatus.OK);
+        taskService.changeDeadline(assignmentWithUpdatedDeadline);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

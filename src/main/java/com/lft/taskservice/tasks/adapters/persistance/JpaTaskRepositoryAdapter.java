@@ -51,8 +51,8 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
     }
 
     @Override
-    public Assignment changeDeadline(Long userId, Long taskId, LocalDate deadline) {
-        return assignmentMapper.toDomain(assignmentRepository.updateDeadline(deadline, taskId, userId));
+    public void changeDeadline(Long userId, Long taskId, LocalDate deadline) {
+        assignmentRepository.updateDeadline(deadline, taskId, userId);
     }
 
 }

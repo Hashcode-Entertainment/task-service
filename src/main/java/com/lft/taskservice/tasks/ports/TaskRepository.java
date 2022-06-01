@@ -16,6 +16,6 @@ public interface TaskRepository {
 
     Task findById(Long id);
 
-    Assignment changeDeadline(Long userId, Long taskId, LocalDate deadline);
+    void changeDeadline(Long userId, Long taskId, LocalDate deadline);
 
 }
