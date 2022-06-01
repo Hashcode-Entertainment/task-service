@@ -55,4 +55,8 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
         assignmentRepository.updateDeadline(deadline, taskId, userId);
     }
 
+    @Override
+    public void deleteAssignment(Long userId, Long taskId) {
+        assignmentRepository.deleteAssignment(userId, taskId);
+    }
 }

@@ -18,4 +18,6 @@ public interface TaskRepository {
 
     void changeDeadline(Long userId, Long taskId, LocalDate deadline);
 
+    void deleteAssignment(Long userId, Long taskId);
+
 }

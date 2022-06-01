@@ -17,4 +17,8 @@ public interface JpaAssignmentRepository extends JpaRepository<AssignmentEntity,
     @Query("update AssignmentEntity a set a.deadline = :deadline where a.taskId=:taskId and a.userId = :userId")
     void updateDeadline(@Param("deadline") LocalDate deadline, @Param("taskId") Long taskId, @Param("userId") Long userId);
 
+    @Modifying
+    @Query("delete from AssignmentEntity a where a.taskId = :taskId and a.userId = :userId")
+    void deleteAssignment(@Param("userId") Long userId, @Param("taskId") Long taskId);
+
 }
