@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class AssignmentDto {
 
     private Long id;
-    private Long taskId;
+    private TaskDto task;
     private Long userId;
     private LocalDate deadline;
     private LocalDate assignedOn;
