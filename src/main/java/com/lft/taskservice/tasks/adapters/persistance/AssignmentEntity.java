@@ -17,7 +17,8 @@ public class AssignmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long taskId;
+    @OneToOne
+    private TaskEntity task;
     private Long userId;
     private LocalDate deadline;
     private LocalDate assignedOn;
