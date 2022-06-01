@@ -40,4 +40,10 @@ public class TaskProcessor implements TaskService {
         }
         return tasks;
     }
+
+    @Override
+    public Assignment changeDeadline(Assignment assignment) {
+        return taskRepository.changeDeadline(assignment.getUserId(), assignment.getTaskId(), assignment.getDeadline());
+    }
+
 }
