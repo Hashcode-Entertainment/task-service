@@ -22,4 +22,8 @@ public interface TaskRepository {
 
     Assignment getInfoOnAssignment(Long userId, Long taskId);
 
+    void deleteTaskById(Long taskId);
+
+    void deleteAllAssignmentsToGivenTask(Long taskId);
+
 }
