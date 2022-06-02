@@ -57,4 +57,11 @@ public class TaskProcessor implements TaskService {
         return taskRepository.getInfoOnAssignment(userId, taskId);
     }
 
+    @Override
+    public void deleteTaskById(Long taskId) {
+        //TODO: liaise with other microservices to ensure that deleting a task from database results in deleting task from any associated workspaces
+        taskRepository.deleteAllAssignmentsToGivenTask(taskId);
+        taskRepository.deleteTaskById(taskId);
+    }
+
 }
