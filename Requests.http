@@ -34,6 +34,11 @@ DELETE http://localhost:8080/tasks/assign/666/1
 Content-Type: application/json
 Accept: application/json
 
+### delete task and all associated assignments
+DELETE http://localhost:8080/tasks/1
+Content-Type: application/json
+Accept: application/json
+
 ### get assignment info
 GET http://localhost:8080/tasks/assignments/666/1
 Content-Type: application/json
