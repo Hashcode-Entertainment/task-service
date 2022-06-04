@@ -5,12 +5,10 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class AssignmentDto {
+public class NewAssignmentDto {
 
-    private Long id;
     private Long taskId;
     private Long userId;
     private LocalDate deadline;
-    private LocalDate assignedOn;
 
 }

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 public class Assignment {
 
+    private Long id;
     private Long taskId;
     private Long userId;
     private LocalDate deadline;
