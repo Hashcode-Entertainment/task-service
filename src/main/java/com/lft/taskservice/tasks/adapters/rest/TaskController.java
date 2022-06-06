@@ -51,5 +51,10 @@ public class TaskController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/assign/{userId}/{taskId}")
+    public ResponseEntity unassignTaskFromUser(@PathVariable("userId") Long userId, @PathVariable("taskId") Long taskId){
+        taskService.deleteAssignment(taskId, userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
