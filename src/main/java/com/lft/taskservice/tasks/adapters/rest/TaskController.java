@@ -4,10 +4,10 @@ import com.lft.taskservice.tasks.ports.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,6 +33,13 @@ public class TaskController {
         var savedAssignment = taskService.assignTaskToUser(assignment);
         var newAssignment = assignmentMapper.toDto(savedAssignment);
         return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/assign/{userId}")
+    public ResponseEntity<List<TaskDto>> getAllTasksAssignedToUser(@PathVariable("userId") Long userId){
+        var tasks = taskService.getAllTasksAssignedToUser(userId);
+        List<TaskDto> taskDtos = tasks.stream().map(task -> taskMapper.toDto(task)).collect(Collectors.toList());
+        return new ResponseEntity<>(taskDtos, HttpStatus.FOUND);
     }
 
 }
