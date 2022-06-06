@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Assignment {
 
     private Long id;
-    private Long taskId;
+    private Task task;
     private Long userId;
     private LocalDate deadline;
     private LocalDate assignedOn = LocalDate.now();

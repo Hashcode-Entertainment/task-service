@@ -10,15 +10,15 @@ import java.util.List;
 
 public interface JpaAssignmentRepository extends JpaRepository<AssignmentEntity, Long> {
 
-    @Query("select a.taskId from AssignmentEntity a where a.userId=:userId")
-    List<Long> findAllTasksIdByUserId(Long userId);
+    @Query("select a.task from AssignmentEntity a where a.userId=:userId")
+    List<TaskEntity> findAllTasksAssignedToUser(Long userId);
 
     @Modifying
-    @Query("update AssignmentEntity a set a.deadline = :deadline where a.taskId=:taskId and a.userId = :userId")
+    @Query("update AssignmentEntity a set a.deadline = :deadline where a.task.id=:taskId and a.userId = :userId")
     void updateDeadline(@Param("deadline") LocalDate deadline, @Param("taskId") Long taskId, @Param("userId") Long userId);
 
     @Modifying
-    @Query("delete from AssignmentEntity a where a.taskId = :taskId and a.userId = :userId")
+    @Query("delete from AssignmentEntity a where a.task.id = :taskId and a.userId = :userId")
     void deleteAssignment(@Param("userId") Long userId, @Param("taskId") Long taskId);
 
 }

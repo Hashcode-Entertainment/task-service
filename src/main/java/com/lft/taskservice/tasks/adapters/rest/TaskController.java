@@ -30,6 +30,8 @@ public class TaskController {
     @PostMapping("/assign")
     public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody NewAssignmentDto newAssignmentDto) {
         var assignment = assignmentMapper.toDomain(newAssignmentDto);
+        var taskToBeAssigned = taskService.findTaskById(newAssignmentDto.getTaskId());
+        assignment.setTask(taskToBeAssigned);
         var savedAssignment = taskService.assignTaskToUser(assignment);
         var newAssignment = assignmentMapper.toDto(savedAssignment);
         return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);
@@ -38,9 +40,7 @@ public class TaskController {
     @GetMapping("/assign/{userId}")
     public ResponseEntity<List<TaskDto>> getAllTasksAssignedToUser(@PathVariable("userId") Long userId){
         var tasks = taskService.getAllTasksAssignedToUser(userId);
-        List<TaskDto> taskDtos = tasks.stream()
-                .map(task -> taskMapper.toDto(task))
-                .collect(Collectors.toList());
+        List<TaskDto> taskDtos = taskMapper.mapList(tasks, TaskDto.class);
         return new ResponseEntity<>(taskDtos, HttpStatus.FOUND);
     }
 
