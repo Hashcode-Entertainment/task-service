@@ -21,4 +21,6 @@ public interface TaskService {
 
     Assignment getInfoOnAssignment(Long userId, Long taskId);
 
+    void deleteTaskById(Long taskId);
+
 }

@@ -27,6 +27,13 @@ public class TaskController {
         return new ResponseEntity<>(taskDto, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity deleteTaskById(@PathVariable("taskId") Long taskId) {
+        taskService.deleteTaskById(taskId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
     @PostMapping("/assign")
     public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody NewAssignmentDto newAssignmentDto) {
         var assignment = assignmentMapper.toDomain(newAssignmentDto);
