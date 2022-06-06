@@ -12,4 +12,7 @@ public interface TaskService {
     Assignment assignTaskToUser(Assignment assignment);
 
     List<Task> getAllTasksAssignedToUser(Long userId);
+
+    void changeDeadline(Assignment assignment);
+
 }

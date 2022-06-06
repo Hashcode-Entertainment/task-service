@@ -3,6 +3,7 @@ package com.lft.taskservice.tasks.ports;
 import com.lft.taskservice.tasks.domain.Assignment;
 import com.lft.taskservice.tasks.domain.Task;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TaskRepository {
@@ -14,5 +15,7 @@ public interface TaskRepository {
     List<Long> getAllIdsOfTasksAssignedToUser(Long userId);
 
     Task findById(Long id);
+
+    void changeDeadline(Long userId, Long taskId, LocalDate deadline);
 
 }

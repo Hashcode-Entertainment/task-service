@@ -38,8 +38,18 @@ public class TaskController {
     @GetMapping("/assign/{userId}")
     public ResponseEntity<List<TaskDto>> getAllTasksAssignedToUser(@PathVariable("userId") Long userId){
         var tasks = taskService.getAllTasksAssignedToUser(userId);
-        List<TaskDto> taskDtos = tasks.stream().map(task -> taskMapper.toDto(task)).collect(Collectors.toList());
+        List<TaskDto> taskDtos = tasks.stream()
+                .map(task -> taskMapper.toDto(task))
+                .collect(Collectors.toList());
         return new ResponseEntity<>(taskDtos, HttpStatus.FOUND);
     }
+
+    @PutMapping("/assign")
+    public ResponseEntity changeDeadlineOfExistingAssignment(@RequestBody NewAssignmentDto newAssignmentDto) {
+        var assignmentWithUpdatedDeadline = assignmentMapper.toDomain(newAssignmentDto);
+        taskService.changeDeadline(assignmentWithUpdatedDeadline);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }

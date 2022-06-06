@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,8 +44,15 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
         return assignmentMapper.toDomain(savedAssignmentEntity);
     }
 
+    @TaskLogging
     @Override
     public List<Long> getAllIdsOfTasksAssignedToUser(Long userId) {
         return assignmentRepository.findAllTasksIdByUserId(userId);
     }
+
+    @Override
+    public void changeDeadline(Long userId, Long taskId, LocalDate deadline) {
+        assignmentRepository.updateDeadline(deadline, taskId, userId);
+    }
+
 }
