@@ -51,4 +51,10 @@ public class TaskProcessor implements TaskService {
     public void deleteAssignment(Long taskId, Long userId) {
         taskRepository.deleteAssignment(userId, taskId);
     }
+
+    @Override
+    public Assignment getInfoOnAssignment(Long userId, Long taskId) {
+        return taskRepository.getInfoOnAssignment(userId, taskId);
+    }
+
 }

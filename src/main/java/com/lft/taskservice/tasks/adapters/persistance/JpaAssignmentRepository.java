@@ -1,5 +1,6 @@
 package com.lft.taskservice.tasks.adapters.persistance;
 
+import com.lft.taskservice.tasks.domain.Assignment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,6 @@ public interface JpaAssignmentRepository extends JpaRepository<AssignmentEntity,
     @Query("delete from AssignmentEntity a where a.task.id = :taskId and a.userId = :userId")
     void deleteAssignment(@Param("userId") Long userId, @Param("taskId") Long taskId);
 
+    @Query("select a from AssignmentEntity a where a.task.id=:taskId and a.userId=:userId ")
+    AssignmentEntity findByUserIdAndTaskId(Long userId, Long taskId);
 }

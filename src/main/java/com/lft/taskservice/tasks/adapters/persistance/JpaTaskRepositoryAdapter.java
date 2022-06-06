@@ -59,4 +59,9 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
         assignmentRepository.deleteAssignment(userId, taskId);
     }
 
+    @Override
+    public Assignment getInfoOnAssignment(Long userId, Long taskId) {
+        return assignmentMapper.toDomain(assignmentRepository.findByUserIdAndTaskId(userId, taskId));
+    }
+
 }
