@@ -5,6 +5,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Task {
 
     private Long id;
