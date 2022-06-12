@@ -26,9 +26,9 @@ class JpaAssignmentRepositoryTest {
     void shouldReturnNoRecords() {
         assertEquals(0, assignmentRepository.findAllTasksAssignedToUser(1L).size());
     }
-
     @Test
     @DirtiesContext
+    @DisplayName("Saving assignment to database")
     void shouldSaveAssignmentToTheDatabase() {
         populateTasks();
         assignmentRepository.save(
@@ -43,6 +43,16 @@ class JpaAssignmentRepositoryTest {
 
     void populateTasks(){
         taskRepository.save(new TaskEntity());
+    }
+
+    void assignTask(){
+        populateTasks();
+        assignmentRepository.save(AssignmentEntity.builder()
+                .task(taskRepository.getReferenceById(1L))
+                .userId(666L)
+                .deadline(LocalDate.now())
+                .assignedOn(LocalDate.now())
+                .build());
     }
 
 }
