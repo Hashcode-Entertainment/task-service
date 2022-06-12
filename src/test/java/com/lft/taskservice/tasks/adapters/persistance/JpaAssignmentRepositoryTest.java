@@ -10,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -41,16 +42,33 @@ class JpaAssignmentRepositoryTest {
         assertEquals(1, assignmentRepository.findAll().size());
     }
 
+    @Test
+    @DirtiesContext
+    @DisplayName("Should return all tasks assigned to a user")
+    void shouldReturnAllTasksAssignedToUser() {
+        assignTask();
+        assertEquals(1, assignmentRepository.findAllTasksAssignedToUser(666L).size());
+    }
 
     @Test
     @DirtiesContext
-    @DisplayName("")
+    @DisplayName("Deleting saved assignment")
     void whenDeleteAssignment_shouldDeleteAssignment(){
         assignTask();
         assertEquals(1, assignmentRepository.findAll().size());
         assignmentRepository.deleteAssignment(666L, 1L);
         assertEquals(0, assignmentRepository.findAll().size());
     }
+
+    @Test
+    @DirtiesContext
+    @DisplayName("Should find assignment if valid userId and taskId are given")
+    void whenValidTaskIdAndUserId_shouldFindAssignment(){
+        assignTask();
+        assertEquals(LocalDate.now(), assignmentRepository.findByUserIdAndTaskId(666L, 1L).getAssignedOn());
+    }
+
+    //////////////////////////////////////////////////////  UTILS ////////////////////////////////////////////////////
 
     void populateTasks(){
         taskRepository.save(new TaskEntity());
