@@ -68,6 +68,18 @@ class JpaAssignmentRepositoryTest {
         assertEquals(LocalDate.now(), assignmentRepository.findByUserIdAndTaskId(666L, 1L).getAssignedOn());
     }
 
+    @Test
+    @DirtiesContext
+    @DisplayName("Should delete all assignments associated with task if valid taskId is given")
+    void whenValidTaskId_deleteAllAssociatedAssignments(){
+        for (int i = 3; i > 0; i--){
+            assignTask();
+        }
+        assertEquals(3, assignmentRepository.findAllTasksAssignedToUser(666L).size());
+        assignmentRepository.deleteAllAssignmentsAssociatedWithTaskId(1L);
+        assertEquals(0, assignmentRepository.findAllTasksAssignedToUser(666L).size());
+    }
+
     //////////////////////////////////////////////////////  UTILS ////////////////////////////////////////////////////
 
     void populateTasks(){
