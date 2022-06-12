@@ -41,6 +41,17 @@ class JpaAssignmentRepositoryTest {
         assertEquals(1, assignmentRepository.findAll().size());
     }
 
+
+    @Test
+    @DirtiesContext
+    @DisplayName("")
+    void whenDeleteAssignment_shouldDeleteAssignment(){
+        assignTask();
+        assertEquals(1, assignmentRepository.findAll().size());
+        assignmentRepository.deleteAssignment(666L, 1L);
+        assertEquals(0, assignmentRepository.findAll().size());
+    }
+
     void populateTasks(){
         taskRepository.save(new TaskEntity());
     }
