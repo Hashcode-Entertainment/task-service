@@ -29,6 +29,8 @@ class JpaAssignmentRepositoryTest {
         assertEquals(0, assignmentRepository.findAllTasksAssignedToUser(1L).size());
     }
 
-
+    void populateTasks(){
+        taskRepository.save(new TaskEntity());
+    }
 
 }
