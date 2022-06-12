@@ -1,8 +1,6 @@
 package com.lft.taskservice.tasks.adapters.persistance;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +10,9 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AssignmentEntity {
 
     @Id
