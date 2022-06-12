@@ -1,6 +1,5 @@
 package com.lft.taskservice.tasks.adapters.persistance;
 
-import com.lft.taskservice.tasks.domain.Assignment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

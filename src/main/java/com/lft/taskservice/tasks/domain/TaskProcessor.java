@@ -1,19 +1,18 @@
 package com.lft.taskservice.tasks.domain;
 
 import com.lft.taskservice.tasks.adapters.logging.TaskLogging;
+import com.lft.taskservice.tasks.ports.AssignmentRepository;
 import com.lft.taskservice.tasks.ports.TaskRepository;
 import com.lft.taskservice.tasks.ports.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class TaskProcessor implements TaskService {
 
     private final TaskRepository taskRepository;
+    private final AssignmentRepository assignmentRepository;
 
     @TaskLogging
     @Override
@@ -30,37 +29,10 @@ public class TaskProcessor implements TaskService {
         return taskRepository.findById(taskId);
     }
 
-    @TaskLogging
-    @Override
-    public Assignment assignTaskToUser(Assignment assignment){
-        return taskRepository.assignTaskToUser(assignment);
-    }
-
-    @Override
-    public List<Task> getAllTasksAssignedToUser(Long userId) {
-        var tasks = taskRepository.getAllTasksAssignedToUser(userId);
-        return tasks;
-    }
-
-    @Override
-    public void changeDeadline(Assignment assignment) {
-        taskRepository.changeDeadline(assignment.getUserId(), assignment.getTask().getId(), assignment.getDeadline());
-    }
-
-    @Override
-    public void deleteAssignment(Long taskId, Long userId) {
-        taskRepository.deleteAssignment(userId, taskId);
-    }
-
-    @Override
-    public Assignment getInfoOnAssignment(Long userId, Long taskId) {
-        return taskRepository.getInfoOnAssignment(userId, taskId);
-    }
-
     @Override
     public void deleteTaskById(Long taskId) {
         //TODO: liaise with other microservices to ensure that deleting a task from database results in deleting task from any associated workspaces
-        taskRepository.deleteAllAssignmentsToGivenTask(taskId);
+        assignmentRepository.deleteAllAssignmentsToGivenTask(taskId);
         taskRepository.deleteTaskById(taskId);
     }
 
