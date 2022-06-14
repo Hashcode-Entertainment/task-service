@@ -17,14 +17,17 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anySet;
-import static org.mockito.Mockito.spy;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,6 +46,48 @@ class AssignmentControllerTest {
     private TaskService taskService;
     @MockBean
     private AssignmentService assignmentService;
+
+    @Test
+    @DisplayName("Should return list of Tasks assigned to a given user")
+    void whenCorrectUserIdProvidedAndTasksAreAssigned_shouldReturnHTTP302() throws Exception {
+        List tasks = createTasks(4L);
+        Mockito.when(assignmentService.getAllTasksAssignedToUser(any())).thenReturn(tasks);
+        ResultActions resultActions = mockMvc.perform(get("http://localhost/assignments/666"))
+                .andDo(print())
+                .andExpect(status().isFound());
+    }
+
+    @Test
+    @DisplayName("Get tasks assigned endpoint test")
+    void whenCorrectUserIdProvidedAndNoTasksAreAssigned_shouldReturnEmptyListAndHTTP302() throws Exception {
+        ResultActions resultActions = mockMvc.perform(get("http://localhost/assignments/666"))
+                .andDo(print())
+                .andExpect(status().isFound());
+        String emptyList = resultActions.andReturn().getResponse().getContentAsString();
+        assertEquals("[]", emptyList);
+    }
+
+    @Test
+    @DisplayName("Change deadline endpoint test")
+    void whenCorrectTaskIdAndUserId_ShouldReturnHTTP201() throws Exception {
+        doNothing().when(assignmentService).changeDeadline(any());
+        var assignmentAsJSON = objectMapper.writeValueAsString(createAssignment());
+        mockMvc.perform(put("http://localhost/assignments")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(assignmentAsJSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Unassign endpoint test")
+    void whenCorrectTaskIdAndUserId_shouldDeleteAssisgnmentAndReturnHTTP201() throws Exception {
+        doNothing().when(assignmentService).deleteAssignment(any(), any());
+
+        mockMvc.perform(delete("http://localhost/assignments/666/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
     protected Assignment createAssignment(){
         return Assignment.builder().id(1L)
@@ -64,5 +109,19 @@ class AssignmentControllerTest {
                 .build();
     }
 
+    protected List<Task> createTasks(Long amount) {
+        List<Task> tasks = new ArrayList<>();
+        for (Long i = 1L; i<amount; i++) {
+            tasks.add(Task.builder()
+                    .id(i)
+                    .name("Task " + i)
+                    .description("Task " + i + " description")
+                    .programmingLang("Any")
+                    .programmingLangVersion("Any")
+                    .workspaceUrl("Any")
+                    .build());
+        }
+        return tasks;
+    }
 
 }
