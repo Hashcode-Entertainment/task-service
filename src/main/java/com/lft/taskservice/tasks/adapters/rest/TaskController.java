@@ -13,10 +13,13 @@ public class TaskController {
 
     private final RestTaskMapper taskMapper;
     private final TaskService taskService;
+    private final WorkspaceClient workspaceClient;
 
     @PostMapping
     public ResponseEntity<TaskDto> create(@RequestBody NewTaskDto newTaskDto) {
         var task = taskMapper.toDomain(newTaskDto);
+        var taskWorkspace = workspaceClient.createTaskWorkspace();
+        task.setWorkspaceUrl(taskWorkspace.getUrl());
         var savedTask = taskService.save(task);
         var taskDto = taskMapper.toDto(savedTask);
 
