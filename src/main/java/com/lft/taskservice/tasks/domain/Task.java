@@ -9,6 +9,7 @@ import lombok.*;
 public class Task {
 
     private Long id;
+    private String ownerEmail;
     private String name;
     private String description;
     private String programmingLang;

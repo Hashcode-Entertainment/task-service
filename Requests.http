@@ -9,6 +9,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
+    "ownerEmail" : "admin@gmail.com",
     "name":"Sample task 2",
     "description":"sample description",
     "programmingLang":"Java",

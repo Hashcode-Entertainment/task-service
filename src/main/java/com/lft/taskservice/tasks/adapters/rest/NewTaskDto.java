@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 @Builder
 public class NewTaskDto {
 
+    private String ownerEmail;
     private String name;
     private String description;
     private String programmingLang;
