@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "TASKS")
@@ -21,7 +22,7 @@ public class TaskEntity {
     private String description;
     private String programmingLang;
     private String programmingLangVersion;
+    private UUID workspaceId;
     private String workspaceUrl;
-
 
 }
