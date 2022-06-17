@@ -1,5 +1,6 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
+import com.lft.taskservice.tasks.adapters.logging.TaskLogging;
 import com.lft.taskservice.tasks.ports.AssignmentService;
 import com.lft.taskservice.tasks.ports.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class AssignmentController {
                 taskToBeAssigned.getWorkspaceId());
 
         assignment.setTask(taskToBeAssigned);
-        assignment.setWorkspaceUrl(userTaskWorkspace.getUrl());
+        assignment.setUserWorkspaceUrl(userTaskWorkspace.getUrl());
 
         var savedAssignment = assignmentService.assignTaskToUser(assignment);
         var newAssignment = assignmentMapper.toDto(savedAssignment);
@@ -45,10 +46,11 @@ public class AssignmentController {
     }
 
     @GetMapping("{userId}")
-    public ResponseEntity<List<TaskDto>> getAllTasksAssignedToUser(@PathVariable("userId") Long userId){
-        var tasks = assignmentService.getAllTasksAssignedToUser(userId);
-        List<TaskDto> taskDtos = taskMapper.mapList(tasks, TaskDto.class);
-        return new ResponseEntity<>(taskDtos, HttpStatus.FOUND);
+    @TaskLogging
+    public ResponseEntity<List<AssignmentDto>> getAllUserAssignments(@PathVariable("userId") Long userId){
+        var assignments = assignmentService.getAllUserAssignments(userId);
+        List<AssignmentDto> assignmentDtos = assignmentMapper.mapList(assignments, AssignmentDto.class);
+        return new ResponseEntity<>(assignmentDtos, HttpStatus.FOUND);
     }
 
     @PutMapping

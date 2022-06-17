@@ -57,7 +57,6 @@ class RestAssignmentMapperTest {
 
         //Then
         assertAll(
-                () -> assertEquals(TASK_ID_1, assignmentDto.getTask().getId()),
                 () -> assertEquals(USER_ID_1, assignmentDto.getUserId()),
                 () -> assertEquals(DEADLINE, assignmentDto.getDeadline())
         );

@@ -2,7 +2,6 @@ package com.lft.taskservice.tasks.adapters.persistance;
 
 import com.lft.taskservice.tasks.adapters.logging.TaskLogging;
 import com.lft.taskservice.tasks.domain.Assignment;
-import com.lft.taskservice.tasks.domain.Task;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

@@ -20,9 +20,10 @@ public class AssignmentProcessor implements AssignmentService {
         return assignmentRepository.assignTaskToUser(assignment);
     }
 
+    @TaskLogging
     @Override
-    public List<Task> getAllTasksAssignedToUser(Long userId) {
-        return assignmentRepository.getAllTasksAssignedToUser(userId);
+    public List<Assignment> getAllUserAssignments(Long userId) {
+        return assignmentRepository.getAllUserAssignments(userId);
     }
 
     @Override

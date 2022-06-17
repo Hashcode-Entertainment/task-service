@@ -1,6 +1,5 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lft.taskservice.tasks.domain.Assignment;
 import com.lft.taskservice.tasks.domain.Task;
@@ -8,14 +7,11 @@ import com.lft.taskservice.tasks.ports.AssignmentService;
 import com.lft.taskservice.tasks.ports.TaskService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.model.TestClass;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -25,7 +21,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -51,7 +46,7 @@ class AssignmentControllerTest {
     @DisplayName("Should return list of Tasks assigned to a given user")
     void whenCorrectUserIdProvidedAndTasksAreAssigned_shouldReturnHTTP302() throws Exception {
         List tasks = createTasks(4L);
-        Mockito.when(assignmentService.getAllTasksAssignedToUser(any())).thenReturn(tasks);
+        Mockito.when(assignmentService.getAllUserAssignments(any())).thenReturn(tasks);
         ResultActions resultActions = mockMvc.perform(get("http://localhost/assignments/666"))
                 .andDo(print())
                 .andExpect(status().isFound());

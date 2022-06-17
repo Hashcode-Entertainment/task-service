@@ -2,7 +2,6 @@ package com.lft.taskservice.tasks.adapters.persistance;
 
 import com.lft.taskservice.tasks.adapters.logging.TaskLogging;
 import com.lft.taskservice.tasks.domain.Assignment;
-import com.lft.taskservice.tasks.domain.Task;
 import com.lft.taskservice.tasks.ports.AssignmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -40,8 +39,8 @@ public class JpaAssignmentRepositoryAdapter implements AssignmentRepository {
 
     @TaskLogging
     @Override
-    public List<Task> getAllTasksAssignedToUser(Long userId) {
-        return taskMapper.mapList(assignmentRepository.findAllTasksAssignedToUser(userId), Task.class);
+    public List<Assignment> getAllUserAssignments(Long userId) {
+        return assignmentMapper.mapList(assignmentRepository.getAllUserAssignments(userId), Assignment.class);
     }
 
     @Override

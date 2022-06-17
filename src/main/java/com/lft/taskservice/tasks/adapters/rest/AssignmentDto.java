@@ -9,6 +9,7 @@ public class AssignmentDto {
 
     private Long id;
     private TaskDto task;
+    private String userWorkspaceUrl;
     private Long userId;
     private LocalDate deadline;
     private LocalDate assignedOn;

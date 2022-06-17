@@ -15,7 +15,7 @@ public class Assignment {
 
     private Long id;
     private Task task;
-    private String workspaceUrl;
+    private String userWorkspaceUrl;
     private Long userId;
     private LocalDate deadline;
     private LocalDate assignedOn = LocalDate.now();

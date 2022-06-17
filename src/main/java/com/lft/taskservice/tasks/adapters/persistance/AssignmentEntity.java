@@ -21,6 +21,7 @@ public class AssignmentEntity {
     @OneToOne
     private TaskEntity task;
     private Long userId;
+    private String userWorkspaceUrl;
     private LocalDate deadline;
     private LocalDate assignedOn;
 

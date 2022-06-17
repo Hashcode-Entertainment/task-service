@@ -10,7 +10,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -25,7 +24,7 @@ class JpaAssignmentRepositoryTest {
     @DisplayName("Empty database is initialized. Should return no records")
     @Test
     void shouldReturnNoRecords() {
-        assertEquals(0, assignmentRepository.findAllTasksAssignedToUser(1L).size());
+        assertEquals(0, assignmentRepository.getAllUserAssignments(1L).size());
     }
     @Test
     @DirtiesContext
@@ -47,7 +46,7 @@ class JpaAssignmentRepositoryTest {
     @DisplayName("Should return all tasks assigned to a user")
     void shouldReturnAllTasksAssignedToUser() {
         assignTask();
-        assertEquals(1, assignmentRepository.findAllTasksAssignedToUser(666L).size());
+        assertEquals(1, assignmentRepository.getAllUserAssignments(666L).size());
     }
 
     @Test
@@ -75,9 +74,9 @@ class JpaAssignmentRepositoryTest {
         for (int i = 3; i > 0; i--){
             assignTask();
         }
-        assertEquals(3, assignmentRepository.findAllTasksAssignedToUser(666L).size());
+        assertEquals(3, assignmentRepository.getAllUserAssignments(666L).size());
         assignmentRepository.deleteAllAssignmentsAssociatedWithTaskId(1L);
-        assertEquals(0, assignmentRepository.findAllTasksAssignedToUser(666L).size());
+        assertEquals(0, assignmentRepository.getAllUserAssignments(666L).size());
     }
 
     //////////////////////////////////////////////////////  UTILS ////////////////////////////////////////////////////
