@@ -2,7 +2,7 @@ package com.lft.taskservice.tasks.adapters.rest;
 
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class AssignmentDto {
@@ -11,7 +11,7 @@ public class AssignmentDto {
     private TaskDto task;
     private String userWorkspaceUrl;
     private Long userId;
-    private LocalDate deadline;
-    private LocalDate assignedOn;
+    private LocalDateTime deadline;
+    private LocalDateTime assignedOn;
 
 }

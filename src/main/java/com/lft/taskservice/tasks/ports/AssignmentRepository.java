@@ -2,7 +2,7 @@ package com.lft.taskservice.tasks.ports;
 
 import com.lft.taskservice.tasks.domain.Assignment;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AssignmentRepository {
@@ -13,7 +13,7 @@ public interface AssignmentRepository {
 
     void deleteAssignment(Long userId, Long taskId);
 
-    void changeDeadline(Long userId, Long taskId, LocalDate deadline);
+    void changeDeadline(Long userId, Long taskId, LocalDateTime deadline);
 
     List<Assignment> getAllUserAssignments(Long userId);
 

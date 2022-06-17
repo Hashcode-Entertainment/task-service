@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,8 +36,8 @@ class JpaAssignmentRepositoryTest {
                 AssignmentEntity.builder()
                         .task(taskRepository.getReferenceById(1L))
                         .userId(666L)
-                        .deadline(LocalDate.now())
-                        .assignedOn(LocalDate.now())
+                        .deadline(LocalDateTime.now())
+                        .assignedOn(LocalDateTime.now())
                         .build());
         assertEquals(1, assignmentRepository.findAll().size());
     }
@@ -90,8 +91,8 @@ class JpaAssignmentRepositoryTest {
         assignmentRepository.save(AssignmentEntity.builder()
                 .task(taskRepository.getReferenceById(1L))
                 .userId(666L)
-                .deadline(LocalDate.now())
-                .assignedOn(LocalDate.now())
+                .deadline(LocalDateTime.now())
+                .assignedOn(LocalDateTime.now())
                 .build());
     }
 

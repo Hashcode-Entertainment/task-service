@@ -3,7 +3,7 @@ package com.lft.taskservice.tasks.adapters.persistance;
 import com.lft.taskservice.tasks.domain.Assignment;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class JpaAssignmentMapperTest {
 
     public static final long USER_ID_1 = 1L;
-    public static final LocalDate DEADLINE = LocalDate.of(2022, 1, 12);
-    public static final LocalDate ASSIGNED_ON = LocalDate.of(2021, 2, 15);
+    public static final LocalDateTime DEADLINE = LocalDateTime.of(2022, 1, 12, 12, 24);
+    public static final LocalDateTime ASSIGNED_ON = LocalDateTime.of(2021, 2, 15, 2, 44);
     public static final int ASSIGNMENTS_COUNT = 2;
 
     private JpaAssignmentMapper mapper = new JpaAssignmentMapper();
@@ -62,8 +62,8 @@ class JpaAssignmentMapperTest {
     void whenMapListOfEntities_thenResultsCountEquals() {
         //Given
         var assignmentEntityList = List.of(
-                        new AssignmentEntity(),
-                        new AssignmentEntity());
+                new AssignmentEntity(),
+                new AssignmentEntity());
 
         //When
         var assignmentList = mapper.mapList(assignmentEntityList, Assignment.class);

@@ -5,6 +5,7 @@ import com.lft.taskservice.tasks.domain.Task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -14,7 +15,7 @@ class RestAssignmentMapperTest {
 
     public static final long TASK_ID_1 = 1L;
     public static final long USER_ID_1 = 1L;
-    public static final LocalDate DEADLINE = LocalDate.of(2012, 1, 12);
+    public static final LocalDateTime DEADLINE = LocalDateTime.of(2012, 1, 12, 10, 24);
     public static final int ASSIGNMENT_DTOS_COUNT = 2;
     private final RestAssignmentMapper mapper = new RestAssignmentMapper();
 

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +17,7 @@ public class Assignment {
     private Task task;
     private String userWorkspaceUrl;
     private Long userId;
-    private LocalDate deadline;
-    private LocalDate assignedOn = LocalDate.now();
+    private LocalDateTime deadline;
+    private LocalDateTime assignedOn = LocalDateTime.now();
 
 }

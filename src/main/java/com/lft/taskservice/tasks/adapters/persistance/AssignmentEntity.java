@@ -3,7 +3,7 @@ package com.lft.taskservice.tasks.adapters.persistance;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ASSIGNMENTS")
@@ -22,7 +22,7 @@ public class AssignmentEntity {
     private TaskEntity task;
     private Long userId;
     private String userWorkspaceUrl;
-    private LocalDate deadline;
-    private LocalDate assignedOn;
+    private LocalDateTime deadline;
+    private LocalDateTime assignedOn;
 
 }

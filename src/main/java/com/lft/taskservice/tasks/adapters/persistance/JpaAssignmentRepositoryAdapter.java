@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Transactional
@@ -44,7 +44,7 @@ public class JpaAssignmentRepositoryAdapter implements AssignmentRepository {
     }
 
     @Override
-    public void changeDeadline(Long userId, Long taskId, LocalDate deadline) {
+    public void changeDeadline(Long userId, Long taskId, LocalDateTime deadline) {
         assignmentRepository.updateDeadline(deadline, taskId, userId);
     }
 

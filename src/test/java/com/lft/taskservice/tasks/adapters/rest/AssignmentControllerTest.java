@@ -15,13 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -88,8 +88,8 @@ class AssignmentControllerTest {
         return Assignment.builder().id(1L)
                 .userId(666L)
                 .task(createTask())
-                .assignedOn(LocalDate.now())
-                .deadline(LocalDate.MAX)
+                .assignedOn(LocalDateTime.now())
+                .deadline(LocalDateTime.MAX)
                 .build();
     }
 

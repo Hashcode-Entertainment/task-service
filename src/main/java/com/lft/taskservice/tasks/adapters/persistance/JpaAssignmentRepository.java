@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface JpaAssignmentRepository extends JpaRepository<AssignmentEntity, Long> {
@@ -15,7 +15,7 @@ public interface JpaAssignmentRepository extends JpaRepository<AssignmentEntity,
 
     @Modifying
     @Query("update AssignmentEntity a set a.deadline = :deadline where a.task.id=:taskId and a.userId = :userId")
-    void updateDeadline(@Param("deadline") LocalDate deadline, @Param("taskId") Long taskId, @Param("userId") Long userId);
+    void updateDeadline(@Param("deadline") LocalDateTime deadline, @Param("taskId") Long taskId, @Param("userId") Long userId);
 
     @Modifying
     @Query("delete from AssignmentEntity a where a.task.id = :taskId and a.userId = :userId")
