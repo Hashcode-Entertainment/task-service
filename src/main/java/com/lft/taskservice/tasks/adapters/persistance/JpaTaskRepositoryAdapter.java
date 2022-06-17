@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -17,6 +18,12 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
 
     private final JpaTaskRepository taskRepository;
     private final JpaTaskMapper taskMapper;
+
+    @Override
+    public List<Task> findAll() {
+        var taskEntities = taskRepository.findAll();
+        return taskMapper.mapList(taskEntities, Task.class);
+    }
 
     @TaskLogging
     @Override

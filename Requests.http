@@ -9,11 +9,16 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "name":"Sample task 1",
+    "name":"Sample task 2",
     "description":"sample description",
     "programmingLang":"Java",
     "programmingLangVersion":17
 }
+
+### List all tasks
+GET http://localhost:8080/tasks/
+Content-Type: application/json
+Accept: application/json
 
 ### assign a task to a user
 POST http://localhost:8080/assignments/

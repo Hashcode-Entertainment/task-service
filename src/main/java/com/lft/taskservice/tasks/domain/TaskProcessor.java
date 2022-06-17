@@ -7,12 +7,19 @@ import com.lft.taskservice.tasks.ports.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class TaskProcessor implements TaskService {
 
     private final TaskRepository taskRepository;
     private final AssignmentRepository assignmentRepository;
+
+    @Override
+    public List<Task> findAll() {
+        return taskRepository.findAll();
+    }
 
     @TaskLogging
     @Override
