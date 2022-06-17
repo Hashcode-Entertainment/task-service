@@ -5,17 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class WorkspaceDto {
+@AllArgsConstructor
+public class AddFilesRequestDto {
 
-    private UUID id;
-    private String owner;
-    private String template;
-    private String url;
+    private String path;
+    private String content;
 
 }

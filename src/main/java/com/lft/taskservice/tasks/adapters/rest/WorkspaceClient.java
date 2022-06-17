@@ -21,4 +21,10 @@ public class WorkspaceClient {
         var newWorkspaceDto = new NewWorkspaceDto(ownerEmail, adminWorkspaceId.toString());
         return restTemplate.postForObject(WORKSPACE_URL, newWorkspaceDto, WorkspaceDto.class);
     }
+
+    public void sendFile(UUID id, String taskYmlString) {
+        var addFilesRequestDto = new AddFilesRequestDto("task.yml", taskYmlString);
+        restTemplate.postForLocation(WORKSPACE_URL + "/" + id + "/files", addFilesRequestDto);
+
+    }
 }

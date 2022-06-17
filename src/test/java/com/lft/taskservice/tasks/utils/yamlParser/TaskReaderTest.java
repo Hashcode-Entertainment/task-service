@@ -1,13 +1,13 @@
 package com.lft.taskservice.tasks.utils.yamlParser;
 
 import com.lft.taskservice.tasks.domain.Task;
+import org.junit.Ignore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Ignore
 class TaskReaderTest {
 
     private TaskReader taskReader = new TaskReader();
