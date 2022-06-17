@@ -1,6 +1,7 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
 import com.lft.taskservice.tasks.ports.TaskService;
+import com.lft.taskservice.tasks.utils.yamlParser.TaskConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,10 @@ public class TaskController {
     public ResponseEntity<TaskDto> create(@RequestBody NewTaskDto newTaskDto) {
         var task = taskMapper.toDomain(newTaskDto);
         var taskWorkspace = workspaceClient.createAdminTaskWorkspace(newTaskDto);
+
+        var taskConverter = new TaskConverter();
+        var taskYmlString = taskConverter.convertTaskToYmlString(task);
+        workspaceClient.sendFile(taskWorkspace.getId(), taskYmlString);
 
         task.setWorkspaceUrl(taskWorkspace.getUrl());
         task.setWorkspaceId(taskWorkspace.getId());
