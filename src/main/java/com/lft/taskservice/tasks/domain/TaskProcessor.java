@@ -17,10 +17,6 @@ public class TaskProcessor implements TaskService {
     @TaskLogging
     @Override
     public Task save(Task task) {
-        // TODO: Get url from Microservice-2 response
-        String url = "https://testurl.com/abcde";
-
-        task.setWorkspaceUrl(url);
         return taskRepository.save(task);
     }
 
@@ -31,7 +27,6 @@ public class TaskProcessor implements TaskService {
 
     @Override
     public void deleteTaskById(Long taskId) {
-        //TODO: liaise with other microservices to ensure that deleting a task from database results in deleting task from any associated workspaces
         assignmentRepository.deleteAllAssignmentsToGivenTask(taskId);
         taskRepository.deleteTaskById(taskId);
     }
