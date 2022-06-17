@@ -16,7 +16,6 @@ public class TaskWriter {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         try {
             objectMapper.writeValue(new File(task.getWorkspaceUrl() + "\\" + task.getId() + ".yml"), task);
-            System.out.println("SAVED TASK TO THE YAML FILE");
         } catch (IOException e){
             throw new FailedToWriteTaskToYamlException();
         }
