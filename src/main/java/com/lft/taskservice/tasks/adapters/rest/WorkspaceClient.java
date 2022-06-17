@@ -9,7 +9,7 @@ public class WorkspaceClient {
     private static final String WORKSPACE_URL = "http://localhost:8080/workspaces";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public WorkspaceDto createTaskWorkspace() {
+    public WorkspaceDto createAdminTaskWorkspace() {
         var newWorkspaceDto = new NewWorkspaceDto("admin", null);
         return restTemplate.postForObject(WORKSPACE_URL, newWorkspaceDto, WorkspaceDto.class);
     }
