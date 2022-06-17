@@ -1,10 +1,10 @@
 ###GET all tasks assigned to a particular user by providing userId as path param
-GET http://localhost:8080/tasks/assign/666
+GET http://localhost:8081/tasks/assign/666
 Content-Type: application/json
 Accept: application/json
 
 ###POST a new task
-POST http://localhost:8080/tasks
+POST http://localhost:8081/tasks
 Content-Type: application/json
 Accept: application/json
 
@@ -17,24 +17,24 @@ Accept: application/json
 }
 
 ### List all tasks
-GET http://localhost:8080/tasks/
+GET http://localhost:8081/tasks/
 Content-Type: application/json
 Accept: application/json
 
 ### assign a task to a user
-POST http://localhost:8080/assignments/
+POST http://localhost:8081/assignments/
 Content-Type: application/json
 Accept: application/json
 
 {"taskId": 1, "userId":666, "deadline": "2022-06-19"}
 
 ### Get ids of all users assigned to task
-GET http://localhost:8080/assignments/1/users
+GET http://localhost:8081/assignments/1/users
 Content-Type: application/json
 Accept: application/json
 
 ### change deadline in an assignment
-PUT http://localhost:8080/assignments
+PUT http://localhost:8081/assignments
 Content-Type: application/json
 Accept: application/json
 
@@ -45,16 +45,16 @@ Accept: application/json
 }
 
 ### delete assignment
-DELETE http://localhost:8080/assignments/666/3
+DELETE http://localhost:8081/assignments/666/3
 Content-Type: application/json
 Accept: application/json
 
 ### delete task and all associated assignments
-DELETE http://localhost:8080/tasks/2
+DELETE http://localhost:8081/tasks/2
 Content-Type: application/json
 Accept: application/json
 
 ### get assignment info
-GET http://localhost:8080/assignments/666/1
+GET http://localhost:8081/assignments/666/1
 Content-Type: application/json
 Accept: application/json
