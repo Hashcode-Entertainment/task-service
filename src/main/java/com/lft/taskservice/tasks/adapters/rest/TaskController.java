@@ -28,8 +28,11 @@ public class TaskController {
     public ResponseEntity<TaskDto> create(@RequestBody NewTaskDto newTaskDto) {
         var task = taskMapper.toDomain(newTaskDto);
         var taskWorkspace = workspaceClient.createAdminTaskWorkspace(newTaskDto);
+
         task.setWorkspaceUrl(taskWorkspace.getUrl());
+        task.setWorkspaceId(taskWorkspace.getId());
         task.setOwnerEmail(newTaskDto.getOwnerEmail());
+
         var savedTask = taskService.save(task);
         var taskDto = taskMapper.toDto(savedTask);
 
