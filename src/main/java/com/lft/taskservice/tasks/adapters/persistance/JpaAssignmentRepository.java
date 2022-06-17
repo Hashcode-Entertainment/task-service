@@ -28,4 +28,6 @@ public interface JpaAssignmentRepository extends JpaRepository<AssignmentEntity,
     @Query("delete from AssignmentEntity a where a.task.id = :taskId")
     void deleteAllAssignmentsAssociatedWithTaskId(@Param("taskId") Long taskId);
 
+    @Query("select a.userId from AssignmentEntity a where a.task.id =:taskId")
+    List<Long> getAllUsersIdsAssignedToTask(Long taskId);
 }

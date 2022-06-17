@@ -29,6 +29,12 @@ public class AssignmentController {
         return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);
     }
 
+    @GetMapping("{taskId}/users")
+    public ResponseEntity<List<Long>> getAllUsersAssignedToTask(@PathVariable Long taskId) {
+        List<Long> usersIds = assignmentService.getAllUsersIdsAssignedToTask(taskId);
+        return new ResponseEntity<>(usersIds, HttpStatus.OK);
+    }
+
     @GetMapping("{userId}")
     public ResponseEntity<List<TaskDto>> getAllTasksAssignedToUser(@PathVariable("userId") Long userId){
         var tasks = assignmentService.getAllTasksAssignedToUser(userId);

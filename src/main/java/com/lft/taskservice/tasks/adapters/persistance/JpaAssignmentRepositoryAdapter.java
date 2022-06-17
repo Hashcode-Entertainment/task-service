@@ -33,6 +33,11 @@ public class JpaAssignmentRepositoryAdapter implements AssignmentRepository {
         return assignmentMapper.toDomain(savedAssignmentEntity);
     }
 
+    @Override
+    public List<Long> getAllUsersIdsAssignedToTask(Long taskId) {
+        return assignmentRepository.getAllUsersIdsAssignedToTask(taskId);
+    }
+
     @TaskLogging
     @Override
     public List<Task> getAllTasksAssignedToUser(Long userId) {

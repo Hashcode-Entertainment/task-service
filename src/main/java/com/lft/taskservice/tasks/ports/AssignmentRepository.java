@@ -20,4 +20,5 @@ public interface AssignmentRepository {
 
     Assignment assignTaskToUser(Assignment assignment);
 
+    List<Long> getAllUsersIdsAssignedToTask(Long taskId);
 }

@@ -28,6 +28,11 @@ Accept: application/json
 
 {"taskId": 1, "userId":666, "deadline": "2022-06-19"}
 
+### Get ids of all users assigned to task
+GET http://localhost:8080/assignments/1/users
+Content-Type: application/json
+Accept: application/json
+
 ### change deadline in an assignment
 PUT http://localhost:8080/assignments
 Content-Type: application/json
