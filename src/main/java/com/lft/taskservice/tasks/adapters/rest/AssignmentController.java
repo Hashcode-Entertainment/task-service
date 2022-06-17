@@ -18,12 +18,21 @@ public class AssignmentController {
     private final RestTaskMapper taskMapper;
     private final AssignmentService assignmentService;
     private final TaskService taskService;
+    private final WorkspaceClient workspaceClient;
+    private final UserClient userClient;
 
     @PostMapping
     public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody NewAssignmentDto newAssignmentDto) {
         var assignment = assignmentMapper.toDomain(newAssignmentDto);
         var taskToBeAssigned = taskService.findTaskById(newAssignmentDto.getTaskId());
+        var user = userClient.getUserById(newAssignmentDto.getUserId());
+
+        var userTaskWorkspace = workspaceClient.createUserTaskWorkspace(user.getEmail(),
+                taskToBeAssigned.getWorkspaceId());
+
         assignment.setTask(taskToBeAssigned);
+        assignment.setWorkspaceUrl(userTaskWorkspace.getUrl());
+
         var savedAssignment = assignmentService.assignTaskToUser(assignment);
         var newAssignment = assignmentMapper.toDto(savedAssignment);
         return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);

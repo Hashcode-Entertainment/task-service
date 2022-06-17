@@ -3,6 +3,8 @@ package com.lft.taskservice.tasks.adapters.rest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.UUID;
+
 @Service
 public class WorkspaceClient {
 
@@ -12,6 +14,11 @@ public class WorkspaceClient {
     public WorkspaceDto createAdminTaskWorkspace(NewTaskDto newTaskDto) {
         var ownerEmail = newTaskDto.getOwnerEmail();
         var newWorkspaceDto = new NewWorkspaceDto(ownerEmail, null);
+        return restTemplate.postForObject(WORKSPACE_URL, newWorkspaceDto, WorkspaceDto.class);
+    }
+
+    public WorkspaceDto createUserTaskWorkspace(String ownerEmail, UUID adminWorkspaceId) {
+        var newWorkspaceDto = new NewWorkspaceDto(ownerEmail, adminWorkspaceId.toString());
         return restTemplate.postForObject(WORKSPACE_URL, newWorkspaceDto, WorkspaceDto.class);
     }
 }
