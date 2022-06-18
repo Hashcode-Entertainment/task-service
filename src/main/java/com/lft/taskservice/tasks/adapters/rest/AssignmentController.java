@@ -16,7 +16,6 @@ import java.util.List;
 public class AssignmentController {
 
     private final RestAssignmentMapper assignmentMapper;
-    private final RestTaskMapper taskMapper;
     private final AssignmentService assignmentService;
     private final TaskService taskService;
     private final WorkspaceClient workspaceClient;
@@ -25,6 +24,7 @@ public class AssignmentController {
     @PostMapping
     public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody NewAssignmentDto newAssignmentDto) {
         var assignment = assignmentMapper.toDomain(newAssignmentDto);
+
         var taskToBeAssigned = taskService.findTaskById(newAssignmentDto.getTaskId());
         var user = userClient.getUserById(newAssignmentDto.getUserId());
 

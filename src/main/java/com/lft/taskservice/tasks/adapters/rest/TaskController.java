@@ -1,7 +1,7 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
 import com.lft.taskservice.tasks.ports.TaskService;
-import com.lft.taskservice.tasks.utils.yamlParser.TaskConverter;
+import com.lft.taskservice.tasks.utils.TaskConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
