@@ -18,6 +18,11 @@ public class RestTaskMapper {
     }
 
     @TaskLogging
+    Task toDomain(TaskDto taskDto){
+        return mapper.map(taskDto, Task.class);
+    }
+
+    @TaskLogging
     TaskDto toDto(Task task) {
         return mapper.map(task, TaskDto.class);
     }
