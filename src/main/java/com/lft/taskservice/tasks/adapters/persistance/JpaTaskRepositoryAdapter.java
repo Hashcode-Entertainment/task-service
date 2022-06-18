@@ -19,6 +19,7 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
     private final JpaTaskRepository taskRepository;
     private final JpaTaskMapper taskMapper;
 
+    @TaskLogging
     @Override
     public List<Task> findAll() {
         var taskEntities = taskRepository.findAll();
@@ -45,4 +46,13 @@ public class JpaTaskRepositoryAdapter implements TaskRepository {
     public void deleteTaskById(Long taskId) {
         taskRepository.deleteById(taskId);
     }
+
+    @TaskLogging
+    @Override
+    public Task updateTask(Task task) {
+        TaskEntity taskEntity = taskMapper.toEntity(task);
+        taskEntity = taskRepository.save(taskEntity);
+        return taskMapper.toDomain(taskEntity);
+    }
+
 }

@@ -38,4 +38,9 @@ public class TaskProcessor implements TaskService {
         taskRepository.deleteTaskById(taskId);
     }
 
+    @Override
+    public Task updateTask(Task task){
+        return taskRepository.updateTask(task);
+    }
+
 }
