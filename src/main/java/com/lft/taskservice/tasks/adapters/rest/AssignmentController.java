@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -43,6 +44,16 @@ public class AssignmentController {
     public ResponseEntity<List<Long>> getIdOfAllUsersAssignedToTask(@PathVariable Long taskId) {
         List<Long> usersIds = assignmentService.getAllUsersIdsAssignedToTask(taskId);
         return new ResponseEntity<>(usersIds, HttpStatus.OK);
+    }
+
+    @GetMapping("{taskId}/users")
+    public ResponseEntity<List<UserDto>> getAllUsersAssignedToTask(@PathVariable Long taskId) {
+        List<Long> userIds = assignmentService.getAllUsersIdsAssignedToTask(taskId);
+        List<UserDto> userDtos = new ArrayList<>();
+        for (Long id: userIds) {
+            userDtos.add(userClient.getUserById(id));
+        }
+        return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 
     @GetMapping("{userId}")
