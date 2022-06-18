@@ -40,7 +40,7 @@ public class AssignmentController {
     }
 
     @GetMapping("{taskId}/users")
-    public ResponseEntity<List<Long>> getAllUsersAssignedToTask(@PathVariable Long taskId) {
+    public ResponseEntity<List<Long>> getIdOfAllUsersAssignedToTask(@PathVariable Long taskId) {
         List<Long> usersIds = assignmentService.getAllUsersIdsAssignedToTask(taskId);
         return new ResponseEntity<>(usersIds, HttpStatus.OK);
     }
