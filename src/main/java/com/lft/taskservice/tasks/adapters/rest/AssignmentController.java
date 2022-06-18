@@ -39,7 +39,7 @@ public class AssignmentController {
         return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);
     }
 
-    @GetMapping("{taskId}/users")
+    @GetMapping("{taskId}/usersId")
     public ResponseEntity<List<Long>> getIdOfAllUsersAssignedToTask(@PathVariable Long taskId) {
         List<Long> usersIds = assignmentService.getAllUsersIdsAssignedToTask(taskId);
         return new ResponseEntity<>(usersIds, HttpStatus.OK);
