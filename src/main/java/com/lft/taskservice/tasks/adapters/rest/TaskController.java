@@ -25,6 +25,13 @@ public class TaskController {
         return new ResponseEntity<>(taskDtos, HttpStatus.OK);
     }
 
+    @GetMapping("{taskId}")
+    public ResponseEntity<TaskDto> findById(@PathVariable Long taskId) {
+        var task = taskService.findTaskById(taskId);
+        var taskDto = taskMapper.toDto(task);
+        return new ResponseEntity<>(taskDto, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<TaskDto> create(@RequestBody NewTaskDto newTaskDto) {
         var task = taskMapper.toDomain(newTaskDto);
