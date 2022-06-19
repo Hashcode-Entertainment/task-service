@@ -86,9 +86,6 @@ class JpaAssignmentRepositoryTest {
 
     void populateTasks(){
         taskRepository.save(new TaskEntity());
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
-        System.out.println(taskRepository.findAll());
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
     }
 
     void assignTask(){
