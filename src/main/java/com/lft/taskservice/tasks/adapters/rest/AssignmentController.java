@@ -1,14 +1,14 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
+import com.lft.taskservice.tasks.adapters.client.UserDto;
 import com.lft.taskservice.tasks.adapters.logging.TaskLogging;
+import com.lft.taskservice.tasks.adapters.manager.ManagerService;
 import com.lft.taskservice.tasks.ports.AssignmentService;
-import com.lft.taskservice.tasks.ports.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,24 +18,12 @@ public class AssignmentController {
 
     private final RestAssignmentMapper assignmentMapper;
     private final AssignmentService assignmentService;
-    private final TaskService taskService;
-    private final WorkspaceClient workspaceClient;
-    private final UserClient userClient;
+    private final ManagerService managerService;
 
     @PostMapping
     public ResponseEntity<AssignmentDto> assignTaskToUser(@RequestBody NewAssignmentDto newAssignmentDto) {
         var assignment = assignmentMapper.toDomain(newAssignmentDto);
-
-        var taskToBeAssigned = taskService.findTaskById(newAssignmentDto.getTaskId());
-        var user = userClient.getUserById(newAssignmentDto.getUserId());
-
-        var userTaskWorkspace = workspaceClient.createUserTaskWorkspace(user.getEmail(),
-                taskToBeAssigned.getWorkspaceId());
-
-        assignment.setTask(taskToBeAssigned);
-        assignment.setUserWorkspaceUrl(userTaskWorkspace.getUrl());
-
-        var savedAssignment = assignmentService.assignTaskToUser(assignment);
+        var savedAssignment = managerService.assignTaskToUser(assignment);
         var newAssignment = assignmentMapper.toDto(savedAssignment);
         return new ResponseEntity<>(newAssignment, HttpStatus.CREATED);
     }
@@ -48,11 +36,7 @@ public class AssignmentController {
 
     @GetMapping("{taskId}/users")
     public ResponseEntity<List<UserDto>> getAllUsersAssignedToTask(@PathVariable Long taskId) {
-        List<Long> userIds = assignmentService.getAllUsersIdsAssignedToTask(taskId);
-        List<UserDto> userDtos = new ArrayList<>();
-        for (Long id: userIds) {
-            userDtos.add(userClient.getUserById(id));
-        }
+        List<UserDto> userDtos = managerService.getAllUsersAssignedToTask(taskId);
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 
