@@ -16,6 +16,7 @@ public class TaskProcessor implements TaskService {
     private final TaskRepository taskRepository;
     private final AssignmentRepository assignmentRepository;
 
+    @TaskLogging
     @Override
     public List<Task> findAll() {
         return taskRepository.findAll();
@@ -27,17 +28,20 @@ public class TaskProcessor implements TaskService {
         return taskRepository.save(task);
     }
 
+    @TaskLogging
     @Override
     public Task findTaskById(Long taskId) {
         return taskRepository.findById(taskId);
     }
 
+    @TaskLogging
     @Override
     public void deleteTaskById(Long taskId) {
         assignmentRepository.deleteAllAssignmentsToGivenTask(taskId);
         taskRepository.deleteTaskById(taskId);
     }
 
+    @TaskLogging
     @Override
     public Task updateTask(Task task){
         return taskRepository.updateTask(task);
