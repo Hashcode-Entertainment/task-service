@@ -1,10 +1,11 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lft.taskservice.tasks.adapters.client.WorkspaceDto;
+import com.lft.taskservice.tasks.adapters.manager.ManagerService;
 import com.lft.taskservice.tasks.domain.Task;
 import com.lft.taskservice.tasks.ports.TaskService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -35,15 +36,11 @@ class TaskControllerTest {
     @MockBean
     private TaskService taskService;
     @MockBean
-    private WorkspaceClient workspaceClient;
+    private ManagerService managerService;
 
     @Test
     void whenPost_thenStatusIsCreated() throws Exception {
         //Given
-        var newTaskDto = NewTaskDto.builder()
-                .name(TASK_NAME_COUNT_NUMBERS)
-                .build();
-
         var task = Task.builder()
                 .id(TASK_ID_1)
                 .name(TASK_NAME_EXAMPLE)
@@ -51,11 +48,9 @@ class TaskControllerTest {
 
         var workspaceDto = new WorkspaceDto(UUID.randomUUID(), "owner@gmail.com", null, "testUrl.com");
 
-        var newTaskDtoAsString = objectMapper.writeValueAsString(newTaskDto);
+        var newTaskDtoAsString = objectMapper.writeValueAsString(task);
 
         //When
-        Mockito.when(workspaceClient.createAdminTaskWorkspace(newTaskDto)).thenReturn(workspaceDto);
-        Mockito.when(restTaskMapper.toDomain(newTaskDto)).thenReturn(task);
         mockMvc.perform(post(TASK_URL)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newTaskDtoAsString))
