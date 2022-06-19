@@ -50,6 +50,12 @@ public class TaskController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-
+    @PutMapping("/taskId")
+    public ResponseEntity updateTask(@RequestBody TaskDto updatedTask){
+        var task = taskMapper.toDomain(updatedTask);
+        var savedTask = taskService.updateTask(task);
+        var taskDto = taskMapper.toDto(savedTask);
+        return new ResponseEntity(taskDto, HttpStatus.OK);
+    }
 
 }
