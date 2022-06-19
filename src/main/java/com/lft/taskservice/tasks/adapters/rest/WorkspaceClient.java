@@ -3,6 +3,7 @@ package com.lft.taskservice.tasks.adapters.rest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,7 +25,7 @@ public class WorkspaceClient {
 
     public void sendFile(UUID id, String taskYmlString) {
         var addFilesRequestDto = new AddFilesRequestDto("task.yml", taskYmlString);
-        restTemplate.postForLocation(WORKSPACE_URL + "/" + id + "/files", addFilesRequestDto);
-
+        var request = List.of(addFilesRequestDto);
+        restTemplate.postForLocation(WORKSPACE_URL + "/" + id + "/files", request);
     }
 }
