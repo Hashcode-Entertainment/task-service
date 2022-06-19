@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.lft.taskservice.tasks.domain.Task;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TaskConverter {
 
     public String convertTaskToYmlString(Task task) {
