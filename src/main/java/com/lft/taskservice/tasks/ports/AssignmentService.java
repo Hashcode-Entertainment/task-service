@@ -17,4 +17,5 @@ public interface AssignmentService {
     Assignment getInfoOnAssignment(Long userId, Long taskId);
 
     List<Long> getAllUsersIdsAssignedToTask(Long taskId);
+
 }
