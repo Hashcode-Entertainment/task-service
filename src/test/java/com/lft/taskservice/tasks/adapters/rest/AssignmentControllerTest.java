@@ -1,10 +1,10 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lft.taskservice.tasks.adapters.manager.ManagerService;
 import com.lft.taskservice.tasks.domain.Assignment;
 import com.lft.taskservice.tasks.domain.Task;
 import com.lft.taskservice.tasks.ports.AssignmentService;
-import com.lft.taskservice.tasks.ports.TaskService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -36,9 +36,7 @@ class AssignmentControllerTest {
     @MockBean
     private RestAssignmentMapper restAssignmentMapper;
     @MockBean
-    private RestTaskMapper restTaskMapper;
-    @MockBean
-    private TaskService taskService;
+    private ManagerService managerService;
     @MockBean
     private AssignmentService assignmentService;
 

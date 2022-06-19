@@ -1,7 +1,7 @@
 package com.lft.taskservice.tasks.adapters.rest;
 
+import com.lft.taskservice.tasks.adapters.manager.ManagerService;
 import com.lft.taskservice.tasks.ports.TaskService;
-import com.lft.taskservice.tasks.utils.TaskConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class TaskController {
 
     private final RestTaskMapper taskMapper;
     private final TaskService taskService;
-    private final WorkspaceClient workspaceClient;
+    private final ManagerService managerService;
 
     @GetMapping
     public ResponseEntity<List<TaskDto>> findAll() {
@@ -35,19 +35,8 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskDto> create(@RequestBody NewTaskDto newTaskDto) {
         var task = taskMapper.toDomain(newTaskDto);
-        var taskWorkspace = workspaceClient.createAdminTaskWorkspace(newTaskDto);
-
-        var taskConverter = new TaskConverter();
-        var taskYmlString = taskConverter.convertTaskToYmlString(task);
-        workspaceClient.sendFile(taskWorkspace.getId(), taskYmlString);
-
-        task.setWorkspaceUrl(taskWorkspace.getUrl());
-        task.setWorkspaceId(taskWorkspace.getId());
-        task.setOwnerEmail(newTaskDto.getOwnerEmail());
-
-        var savedTask = taskService.save(task);
+        var savedTask = managerService.createTask(task);
         var taskDto = taskMapper.toDto(savedTask);
-
         return new ResponseEntity<>(taskDto, HttpStatus.CREATED);
     }
 

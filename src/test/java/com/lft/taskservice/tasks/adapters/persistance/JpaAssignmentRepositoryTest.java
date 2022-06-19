@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class JpaAssignmentRepositoryTest {
+
+    public static final LocalDateTime DEADLINE = LocalDateTime.now();
+    public static final LocalDateTime ASSIGNED_ON = LocalDateTime.now();
 
     @Autowired
     JpaAssignmentRepository assignmentRepository;
@@ -36,8 +38,8 @@ class JpaAssignmentRepositoryTest {
                 AssignmentEntity.builder()
                         .task(taskRepository.getReferenceById(1L))
                         .userId(666L)
-                        .deadline(LocalDateTime.now())
-                        .assignedOn(LocalDateTime.now())
+                        .deadline(DEADLINE)
+                        .assignedOn(ASSIGNED_ON)
                         .build());
         assertEquals(1, assignmentRepository.findAll().size());
     }
@@ -65,7 +67,7 @@ class JpaAssignmentRepositoryTest {
     @DisplayName("Should find assignment if valid userId and taskId are given")
     void whenValidTaskIdAndUserId_shouldFindAssignment(){
         assignTask();
-        assertEquals(LocalDate.now(), assignmentRepository.findByUserIdAndTaskId(666L, 1L).getAssignedOn());
+        assertEquals(ASSIGNED_ON, assignmentRepository.findByUserIdAndTaskId(666L, 1L).getAssignedOn());
     }
 
     @Test
@@ -84,6 +86,9 @@ class JpaAssignmentRepositoryTest {
 
     void populateTasks(){
         taskRepository.save(new TaskEntity());
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
+        System.out.println(taskRepository.findAll());
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
     }
 
     void assignTask(){
@@ -91,8 +96,8 @@ class JpaAssignmentRepositoryTest {
         assignmentRepository.save(AssignmentEntity.builder()
                 .task(taskRepository.getReferenceById(1L))
                 .userId(666L)
-                .deadline(LocalDateTime.now())
-                .assignedOn(LocalDateTime.now())
+                .deadline(DEADLINE)
+                .assignedOn(ASSIGNED_ON)
                 .build());
     }
 

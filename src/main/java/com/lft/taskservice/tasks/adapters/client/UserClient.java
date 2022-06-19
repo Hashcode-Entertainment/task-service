@@ -1,4 +1,4 @@
-package com.lft.taskservice.tasks.adapters.rest;
+package com.lft.taskservice.tasks.adapters.client;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
