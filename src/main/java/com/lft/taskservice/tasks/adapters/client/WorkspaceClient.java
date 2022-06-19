@@ -1,6 +1,5 @@
 package com.lft.taskservice.tasks.adapters.client;
 
-import com.lft.taskservice.tasks.adapters.rest.NewWorkspaceDto;
 import com.lft.taskservice.tasks.domain.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
