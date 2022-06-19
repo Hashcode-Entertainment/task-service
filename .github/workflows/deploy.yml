@@ -1,0 +1,27 @@
+name: Digtal Ocean - deploy
+
+on:
+  push:
+    branches: [ master ]
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          mkdir -p task-service
+          cd task-service
+          rm -rf *
+          git clone https://github.com/Hashcode-Entertainment/task-service.git
+          docker container run --rm -v ${PWD}/task-service:/tasks -v /root/.m2:/root/.m2 -w /tasks maven:3.8.4-openjdk-17 mvn -DskipTests clean package spring-boot:repackage
+          systemctl restart taskapp.service
