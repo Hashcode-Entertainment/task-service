@@ -14,7 +14,8 @@ public class RestTaskMapper {
     private final ModelMapper mapper = new ModelMapper();
 
     @TaskLogging
-    Task toDomain(NewTaskDto newTaskDto) { return mapper.map(newTaskDto, Task.class);
+    Task toDomain(NewTaskDto newTaskDto) {
+        return mapper.map(newTaskDto, Task.class);
     }
 
     @TaskLogging
@@ -34,6 +35,5 @@ public class RestTaskMapper {
                 .map(element -> mapper.map(element, targetClass))
                 .collect(Collectors.toList());
     }
-
 
 }
