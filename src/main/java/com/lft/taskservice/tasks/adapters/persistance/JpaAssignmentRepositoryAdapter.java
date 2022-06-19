@@ -57,4 +57,5 @@ public class JpaAssignmentRepositoryAdapter implements AssignmentRepository {
     public Assignment getInfoOnAssignment(Long userId, Long taskId) {
         return assignmentMapper.toDomain(assignmentRepository.findByUserIdAndTaskId(userId, taskId));
     }
+
 }

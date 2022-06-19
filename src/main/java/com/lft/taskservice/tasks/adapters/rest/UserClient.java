@@ -12,4 +12,5 @@ public class UserClient {
     public UserDto getUserById(Long id) {
         return restTemplate.getForObject(USER_URL + "/" + id, UserDto.class);
     }
+
 }

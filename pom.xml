@@ -13,9 +13,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>task-service</name>
     <description>task-service</description>
+
     <properties>
         <java.version>17</java.version>
+        <testcontainers.version>1.17.2</testcontainers.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -62,16 +65,15 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
-            <version>1.17.2</version>
+            <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
-            <version>1.17.2</version>
+            <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>

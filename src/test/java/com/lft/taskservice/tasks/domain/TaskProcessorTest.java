@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -17,7 +18,8 @@ class TaskProcessorTest {
     public static final long TASK_ID_1 = 1L;
 
     @Mock
-    private TaskRepository taskRepository;
+    private TaskRepository mockTaskRepository;
+
     @Mock
     private AssignmentRepository assignmentRepository;
     @InjectMocks
@@ -33,7 +35,7 @@ class TaskProcessorTest {
                 .build();
 
         //When
-        when(taskRepository.save(task)).thenReturn(savedTask);
+        when(mockTaskRepository.save(task)).thenReturn(savedTask);
         var processedTask = taskProcessor.save(task);
 
         //Then
@@ -48,10 +50,11 @@ class TaskProcessorTest {
                 .build();
 
         //When
-        when(taskRepository.findById(TASK_ID_1)).thenReturn(task);
+        when(mockTaskRepository.findById(TASK_ID_1)).thenReturn(task);
         var processedTask = taskProcessor.findTaskById(TASK_ID_1);
 
         //Then
         assertEquals(TASK_ID_1, processedTask.getId());
     }
+
 }

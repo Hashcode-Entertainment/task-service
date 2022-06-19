@@ -1,7 +1,0 @@
---- #task info
-id: 1
-name: Triangle area
-description: Write a class calculating area of the triangle
-programmingLang: Java
-programmingLangVersion: 17
-workspaceUrl: fake/directory

@@ -45,4 +45,5 @@ public class AssignmentProcessor implements AssignmentService {
     public List<Long> getAllUsersIdsAssignedToTask(Long taskId) {
         return assignmentRepository.getAllUsersIdsAssignedToTask(taskId);
     }
+
 }
