@@ -4,7 +4,6 @@ import com.lft.taskservice.tasks.domain.Assignment;
 import com.lft.taskservice.tasks.domain.Task;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -79,4 +78,5 @@ class RestAssignmentMapperTest {
                 () -> assertEquals(ASSIGNMENT_DTOS_COUNT, assignmentDtoList.size())
         );
     }
+
 }

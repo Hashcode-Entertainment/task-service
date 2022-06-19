@@ -85,4 +85,5 @@ class JpaAssignmentMapperTest {
         //Then
         assertEquals(ASSIGNMENTS_COUNT, assignmentEntityList.size());
     }
+
 }
